@@ -1,0 +1,8 @@
+class TripComputer
+{
+
+    TripComputer () {
+        
+    }
+
+}

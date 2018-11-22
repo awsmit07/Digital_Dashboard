@@ -1,0 +1,7 @@
+class SensorDataProvider
+{
+    SensorDataProvider () 
+    {
+        
+    }
+}
