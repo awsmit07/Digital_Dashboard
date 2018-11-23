@@ -39,7 +39,7 @@ class Gauge
         ellipse(x, y, 100, 100);
         fill(255);
         textAlign(CENTER);
-        text(currentValue+units, x, y);
+        text(nf(currentValue,0, 2)+units, x, y);
         text(text, x,y+65);
     }
 
