@@ -9,6 +9,7 @@ void setup()
     dataStream=new SensorDataProvider("car_status_BMW_323i.csv");
     size(1080, 720);
     frameRate(5);
+    println("kim is editing");
 }
 
 //DRAW
