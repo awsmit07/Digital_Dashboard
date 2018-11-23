@@ -17,7 +17,11 @@ class Gauge
         this.text=text;
     }
 
+<<<<<<< HEAD
     //Gets input and stores it as current Value if it is within range
+=======
+    //Gets input and stores it as current Value
+>>>>>>> 0e442ae2894a94c2d58747c09430eba1f1d2b791
     void getInput(float input)
     {
         if(input>=min && input<=max)
