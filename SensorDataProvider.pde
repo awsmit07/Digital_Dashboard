@@ -17,7 +17,7 @@ class SensorDataProvider
     //the row with the index of currrentIndex
     public void readNext()
     {
-        if(currentIndex<dataTable.getRowCount())
+        if(currentIndex<dataTable.getRowCount()-1)
         {
             currentIndex++;
             row=dataTable.getRow(currentIndex);
