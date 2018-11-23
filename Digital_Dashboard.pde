@@ -1,9 +1,9 @@
 //Final Project
 //Andreas Smit & Kim Rooney
-import processing.sound.*;
-
 
 SensorDataProvider dataStream;
+
+//SETUP
 void setup()
 {
     dataStream=new SensorDataProvider("car_status_BMW_323i.csv");
@@ -11,12 +11,12 @@ void setup()
     frameRate(5);
 }
 
+//DRAW
 void draw()
 {
     background(0);
     dataStream.readNext();
-    TableRow carRow=dataStream.row;
-    String carString="Time: "+ carRow.getInt("Time") +" Gear: "+ carRow.getFloat("Gear Ratio")+" Fuel: "+carRow.getFloat("Fuel Level")+" RPM: "+carRow.getInt("RPM")+" Y: "+carRow.getFloat("X")+" X: "+carRow.getFloat("Y");
+    String carString="Time: "+ dataStream.readTime() +" Gear: "+ dataStream.readRatio()+" Fuel: "+dataStream.readFuel()+" RPM: "+dataStream.readRPM()+" Y: "+dataStream.readY()+" X: "+dataStream.readX();
     fill(255);
     text(carString, width/2, 100);
 }
