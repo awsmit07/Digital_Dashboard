@@ -1,13 +1,10 @@
 class TripComputer
 {
-
-    TripComputer () 
-    {
       int RPM;
       float gear_ratio;
       float totalTravelledDistance; 
       float speed; 
-
+    
     //Calculates the current Speed
     void getCurrentSpeed()
     {
