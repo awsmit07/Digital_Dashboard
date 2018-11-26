@@ -1,9 +1,9 @@
 class TripComputer
 {
-      int RPM;
-      float gear_ratio;
-      float totalTravelledDistance; 
-      float speed; 
+    int RPM;
+    float gear_ratio;
+    float totalTravelledDistance; 
+    float speed; 
     
     //Calculates the current Speed
     void getCurrentSpeed()
@@ -12,9 +12,9 @@ class TripComputer
     }
 
     //Calculates and updates the total Distance Traveled.
-    void updateTotalDistance()
+    void updateTotalDistance(int time)
     {
-      totalTravelledDistance += speed; 
+      if (time<=599) totalTravelledDistance += speed/3600; 
     }
 
 }
