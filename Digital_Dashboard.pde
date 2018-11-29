@@ -34,6 +34,6 @@ void draw()
     text(dataStream.readTime()/60 +":"+dataStream.readTime()%60, 500, 100);
     fuelGauge.getInput(dataStream.readFuel());
     tackometer.getInput(dataStream.readRPM());
-    speedometer.getInput(tripComputer.speed);
+    speedometer.getInput(tripComputer.speed*3.6);
     text(nf(tripComputer.totalTravelledDistance,0, 2) +"km", 100, 300);
 }
