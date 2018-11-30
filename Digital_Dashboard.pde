@@ -23,11 +23,6 @@ void setup()
     
     size(1080, 720);
     frameRate(30);
-    fuelGauge=new Gauge(0, 60, "L", 100, 100, "Fuel");
-    speedometer=new Gauge(0, 300, "km/h", 250, 100, "Speed");
-    tackometer=new Gauge(0, 10000, "RPM", 400, 100, "RPM");
-    compass=new Compass(0,0,width/2, 100);
-    tripComputer=new TripComputer();
     carButton=new CarButton(width/2-50, height/3-50, 100, 25, "Car", #7907fc, #f407fc, #070ffc);
     truckButton=new TruckButton(width/2-50, height/3-20, 100, 25, "Truck", #7907fc, #f407fc, #070ffc);
     exitButton=new ExitButton(width/2-50, height/3+10, 100, 25, "Exit", #7907fc, #f407fc, #070ffc);
@@ -36,8 +31,8 @@ void setup()
 //DRAW
 void draw()
 {
-    background(0);
     
+    background(0);
     if(inputMode)
     {
         carButton.button_update();
@@ -45,10 +40,23 @@ void draw()
         exitButton.button_update();
     }
     
+    if(!inputMode && currentIndex==-1)
+    {
+        background(0);
+        dataStream=new SensorDataProvider(file);
+        compass=new Compass(0,0,width/2, 100);
+        tripComputer=new TripComputer();
+        fuelTank=new FuelTank(tankCapacity);
+        fuelGauge=new Gauge(0, 60, "L", (int)fuelTank.fuelCapacity, 100, "Fuel");
+        speedometer=new Gauge(0, 300, "km/h", 250, 100, "Speed");
+        tackometer=new Gauge(0, 10000, "RPM", 400, 100, "RPM");
+        
+        frameRate(10);
+
+    }
     if(!inputMode)
     {
-        currentIndex++;
-        frameRate(10);
+        currentIndex++;   
         dataStream.readNext();
         tripComputer.RPM=dataStream.readRPM();
         tripComputer.gear_ratio=dataStream.readRatio();

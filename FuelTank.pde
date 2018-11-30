@@ -4,8 +4,11 @@ class FuelTank
   float lastFuelLevel = 0;
   int j = 0;
   float fuelLevel;
+  float fuelCapacity;
 
-  FuelTank () {
+  FuelTank (float fuelCapacity) 
+  {
+    this.fuelCapacity=fuelCapacity;
   }
 
   void getfuelLevel()

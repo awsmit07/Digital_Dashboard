@@ -71,7 +71,7 @@ class TruckButton extends Button
 		file="car_status_Truck_F150.csv";
 		inputMode=false;
     radius=0.254;
-    dataStream=new SensorDataProvider(file);
+    
     tankCapacity = 80;
 	}
 }
