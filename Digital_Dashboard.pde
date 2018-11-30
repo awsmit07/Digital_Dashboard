@@ -12,9 +12,10 @@ CarButton carButton;
 TruckButton truckButton;
 ExitButton exitButton;
 Compass compass;
-
+FuelTank fuelTank;
 float radius=0;
 int currentIndex=-1;
+float tankCapacity;
 
 //SETUP
 void setup()

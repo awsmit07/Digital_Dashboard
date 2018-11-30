@@ -72,6 +72,7 @@ class TruckButton extends Button
 		inputMode=false;
     radius=0.254;
     dataStream=new SensorDataProvider(file);
+    tankCapacity = 80;
 	}
 }
 
@@ -87,6 +88,7 @@ class CarButton extends Button
     radius=0.23;
 		inputMode=false;
     dataStream=new SensorDataProvider(file);
+    tankCapacity = 60;
 	}
 }
 
