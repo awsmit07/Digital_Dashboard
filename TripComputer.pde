@@ -8,13 +8,13 @@ class TripComputer
     //Calculates the current Speed
     void getCurrentSpeed()
     {
-      speed = (RPM/60)*(1/gear_ratio)*2*PI*0.23;
+      speed = (((float)RPM)/60.0)*(1/((float)gear_ratio))*2*PI*0.23;
     }
 
     //Calculates and updates the total Distance Traveled.
     void updateTotalDistance(int time)
     {
-      if (time<=599) totalTravelledDistance += speed/3600; 
+      if (time<=599) totalTravelledDistance += speed; 
     }
 
 }

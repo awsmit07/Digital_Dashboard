@@ -14,7 +14,7 @@ void setup()
     size(1080, 720);
     frameRate(5);
     fuelGauge=new Gauge(0, 60, "L", 100, 100, "Fuel");
-    speedometer=new Gauge(0, 200, "km/h", 250, 100, "Speed");
+    speedometer=new Gauge(0, 300, "km/h", 250, 100, "Speed");
     tackometer=new Gauge(0, 10000, "RPM", 400, 100, "RPM");
     tripComputer=new TripComputer();
 }
@@ -35,5 +35,5 @@ void draw()
     fuelGauge.getInput(dataStream.readFuel());
     tackometer.getInput(dataStream.readRPM());
     speedometer.getInput(tripComputer.speed*3.6);
-    text(nf(tripComputer.totalTravelledDistance,0, 2) +"km", 100, 300);
+    text(nf(tripComputer.totalTravelledDistance*0.001,0, 2) +"km", 100, 300);
 }
