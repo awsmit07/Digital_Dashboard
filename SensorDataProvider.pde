@@ -2,7 +2,6 @@ class SensorDataProvider
 {
     private Table dataTable;
     private String filePath;
-    private int currentIndex=-1;
     public TableRow row;
 
     //Initializes the new SensorDataProvidor
@@ -19,7 +18,6 @@ class SensorDataProvider
     {
         if(currentIndex<dataTable.getRowCount()-1)
         {
-            currentIndex++;
             row=dataTable.getRow(currentIndex);
         }
     }

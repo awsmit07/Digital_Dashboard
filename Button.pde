@@ -25,11 +25,14 @@ class Button
   	}
   	void button_update()
   	{
+    textAlign(CENTER);
+    stroke(0);
 		if((mouseX>xPos && mouseX<xPos+width && mouseY>yPos && mouseY<yPos+height) || autoPress)
 		{
 			fill(color1);
 			rect(xPos, yPos, width, height);
 			hovered=true;
+      
 			if(mousePressed || autoPress)
 			{
 				fill(color2);
@@ -55,4 +58,46 @@ class Button
 		
   	}
   	void button_function(){ println("error");}
+}
+
+class TruckButton extends Button
+{
+	TruckButton(int xPos, int yPos, int width, int height, String text, int color0, int color1, int color2)
+	{
+		super(xPos, yPos, width, height, text, color0, color1, color2);
+	}
+	void button_function()
+	{
+		file="car_status_Truck_F150.csv";
+		inputMode=false;
+    radius=0.254;
+    dataStream=new SensorDataProvider(file);
+	}
+}
+
+class CarButton extends Button
+{
+	CarButton(int xPos, int yPos, int width, int height, String text, int color0, int color1, int color2)
+	{
+		super(xPos, yPos, width, height, text, color0, color1, color2);
+	}
+	void button_function()
+	{
+		file="car_status_BMW_323i.csv";
+    radius=0.23;
+		inputMode=false;
+    dataStream=new SensorDataProvider(file);
+	}
+}
+
+class ExitButton extends Button
+{
+	ExitButton(int xPos, int yPos, int width, int height, String text, int color0, int color1, int color2)
+	{
+		super(xPos, yPos, width, height, text, color0, color1, color2);
+	}
+	void button_function()
+	{
+		exit();
+	}
 }
