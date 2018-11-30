@@ -6,7 +6,7 @@ class Gauge
     private int x;
     private int y;
     private String text;
-
+    private PFont font;
     Gauge (float min, float max, String units, int x, int y, String text) 
     {
         this.min=min;
@@ -15,6 +15,8 @@ class Gauge
         this.x=x;
         this.y=y;
         this.text=text;
+        font=createFont("ConnectionSerif.otf", 12);
+        //textFont(font);
     }
 
     //Gets input and stores it as current Value if it is within range
@@ -39,6 +41,7 @@ class Gauge
         ellipse(x, y, 100, 100);
         fill(255);
         textAlign(CENTER);
+        textSize(16);
         text(nf(currentValue,0, 2)+units, x, y);
         text(text, x,y+65);
     }

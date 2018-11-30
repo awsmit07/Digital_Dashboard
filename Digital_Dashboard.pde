@@ -11,6 +11,8 @@ String file="";
 CarButton carButton;
 TruckButton truckButton;
 ExitButton exitButton;
+Compass compass;
+
 float radius=0;
 int currentIndex=-1;
 
@@ -23,6 +25,7 @@ void setup()
     fuelGauge=new Gauge(0, 60, "L", 100, 100, "Fuel");
     speedometer=new Gauge(0, 300, "km/h", 250, 100, "Speed");
     tackometer=new Gauge(0, 10000, "RPM", 400, 100, "RPM");
+    compass=new Compass(0,0,width/2, 100);
     tripComputer=new TripComputer();
     carButton=new CarButton(width/2-50, height/3-50, 100, 25, "Car", #7907fc, #f407fc, #070ffc);
     truckButton=new TruckButton(width/2-50, height/3-20, 100, 25, "Truck", #7907fc, #f407fc, #070ffc);
@@ -36,11 +39,11 @@ void draw()
     
     if(inputMode)
     {
-        
         carButton.button_update();
         truckButton.button_update();
         exitButton.button_update();
     }
+    
     if(!inputMode)
     {
         currentIndex++;
@@ -50,7 +53,7 @@ void draw()
         tripComputer.gear_ratio=dataStream.readRatio();
         tripComputer.getCurrentSpeed();
         tripComputer.updateTotalDistance(dataStream.readTime());
-        
+        compass.update(dataStream.readY(), dataStream.readX());
         fuelGauge.getInput(dataStream.readFuel());
         tackometer.getInput(dataStream.readRPM());
         speedometer.getInput(tripComputer.speed*3.6);
