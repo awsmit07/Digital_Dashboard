@@ -2,18 +2,17 @@ class FuelComputer
 {
       float fuelEconomy;
       float fuelConsumption;
-      float [] fuelEconomyHistory;
+      float [] fuelEconomyHistory = new float [dataStream.dataTable.getRowCount()];
       float averageFuelEconomy;
       float range; 
       float distanceTravelled;
-      float fuelConsumed;
       float remainingFuel;
       int i = 0;
 
     //Calculates the fuel economy of the car in km/L
     void calculateFuelEconomy()
     {
-      fuelEconomy = distanceTravelled/fuelConsumed; 
+      fuelEconomy = distanceTravelled/fuelTank.fuelConsumed[i]; 
       fuelEconomyHistory[i] = fuelEconomy; 
       i++;
     }

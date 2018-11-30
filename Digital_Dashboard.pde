@@ -11,8 +11,10 @@ String file="";
 CarButton carButton;
 TruckButton truckButton;
 ExitButton exitButton;
+FuelTank fuelTank;
 float radius=0;
 int currentIndex=-1;
+float tankCapacity;
 
 //SETUP
 void setup()
