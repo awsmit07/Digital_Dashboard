@@ -56,7 +56,7 @@ void draw()
         speedometer.getInput(tripComputer.speed*3.6);
         fill(255);
         text(nf(tripComputer.totalTravelledDistance*0.001,0, 2) +"km", 100, 300);
-        text(dataStream.readTime()/60 +":"+dataStream.readTime()%60, 500, 100);
+        text(dataStream.readTime()/60 +":"+nf(dataStream.readTime()%60, 2, 0), 500, 100);
     }
     if(currentIndex>600)
     {
