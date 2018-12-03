@@ -1,6 +1,8 @@
 //Final Project
 //Andreas Smit & Kim Rooney
+import org.gicentre.utils.stat.*;
 
+Graph speedChart;
 SensorDataProvider dataStream;
 TripComputer tripComputer;
 Gauge fuelGauge;
@@ -25,11 +27,10 @@ void setup()
     
     size(1080, 850);
     frameRate(30);
-    
     carButton=new CarButton(width/2-50, height/3-50, 100, 25, "Car", #7907fc, #f407fc, #070ffc);
     truckButton=new TruckButton(width/2-50, height/3-20, 100, 25, "Truck", #7907fc, #f407fc, #070ffc);
     exitButton=new ExitButton(width/2-50, height/3+10, 100, 25, "Exit", #7907fc, #f407fc, #070ffc);
- 
+    speedChart=new Graph(0, 600, 0, 300, this);
 }
 
 //DRAW
@@ -56,7 +57,6 @@ void draw()
         tackometer=new Gauge(0, 10000, " RPM", 840, 300, "Tachometer");
         tripComputer=new TripComputer();
         frameRate(10);
-
     }
     if(!inputMode)
     {
@@ -70,6 +70,8 @@ void draw()
         fuelGauge.getInput(dataStream.readFuel());
         tackometer.getInput(dataStream.readRPM());
         speedometer.getInput(tripComputer.speed*3.6);
+        speedChart.updateData(tripComputer.speed*3.6);
+        speedChart.drawChart();
         fill(255);
         text("Odometer: "+nf(tripComputer.totalTravelledDistance*0.001,0, 2) +"km", 540, 425);
         text("Time: "+dataStream.readTime()/60 +":"+nf(dataStream.readTime()%60, 2, 0), 1020, 30);
