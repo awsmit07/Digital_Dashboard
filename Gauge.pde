@@ -36,14 +36,25 @@ class Gauge
     //Displays the Gauge on screen
     void display()
     {
-        stroke(255);
+        stroke(0,0,400);
+        strokeWeight(10);
         fill(0);
-        ellipse(x, y, 100, 100);
+        ellipse(x, y, 250, 250);
+        strokeWeight(2);
+        rect(390, 400, 300, 35);
         fill(255);
         textAlign(CENTER);
+<<<<<<< HEAD
         textSize(16);
         text(nf(currentValue,0, 2)+units, x, y);
         text(text, x,y+65);
+=======
+        textSize(30);
+        text(nf(currentValue,0, 2)+units, x, y+15);
+        textSize(20);
+        text(text, x,y+160);
+       
+>>>>>>> 7d99ae48727e0fed452cea3aa1322e1786ba1cb4
     }
 
 }
