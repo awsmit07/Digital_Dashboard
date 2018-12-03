@@ -21,10 +21,11 @@ class Compass
         else text+='S';
         if(dLong>0) text+='E';
         else text+='W';
-        stroke(255);
+        stroke(0,0,255);
+        strokeWeight(2);
         fill(0);
         ellipse(X,Y, 50, 50);
-        textAlign(CENTER);
+        textAlign(CENTER, CENTER);
         fill(255);
         text(text, X,Y);
         preLat=curLat;
