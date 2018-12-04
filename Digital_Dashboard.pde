@@ -58,7 +58,7 @@ void draw()
         tackometer=new Gauge(0, 10000, " RPM", 840, 300, "Tachometer");
         tripComputer=new TripComputer();
         consumptionChart=new Graph(0, 600, 0, 300, this, 40);
-        economyChart=new Graph(width-500, 600, 0, 300, this, 60);
+        economyChart=new Graph(width-500, 600, 0, 10, this, 60);
         frameRate(10);
     }
     if(!inputMode)
@@ -81,9 +81,9 @@ void draw()
         fuelGauge.getInput(dataStream.readFuel());
         tackometer.getInput(dataStream.readRPM());
         speedometer.getInput(tripComputer.speed*3.6);
-        consumptionChart.updateData(tripComputer.speed*3.6);
+        consumptionChart.updateData(fuelComputer.fuelConsumption);
         consumptionChart.drawChart();
-        economyChart.updateData(tripComputer.RPM);
+        economyChart.updateData(fuelComputer.averageFuelEconomy);
         economyChart.drawChart();
         fill(255);
         text("Odometer: "+nf(tripComputer.totalTravelledDistance*0.001,0, 2) +" km", 540, 425);

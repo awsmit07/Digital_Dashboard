@@ -46,7 +46,7 @@ class FuelComputer
     float briefFuelEconomy = 0;
     for (int j = currentIndex; j > currentIndex-60 && j>0; j--)
       briefFuelEconomy += fuelEconomyHistory[j];
-    println(briefFuelEconomy);
+    //println(briefFuelEconomy);
     briefFuelEconomy /= 60;
     range = briefFuelEconomy*fuelTank.fuelLevel;
   }
