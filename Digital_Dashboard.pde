@@ -52,6 +52,7 @@ void draw()
         compass=new Compass(0,0,width/2, 35);
         tripComputer=new TripComputer();
         fuelTank=new FuelTank(tankCapacity);
+        fuelComputer=new FuelComputer();
         fuelGauge=new Gauge(0, (int)fuelTank.fuelCapacity, " L", 240, 300, "Fuel Gauge");
         speedometer=new Gauge(0, 300, " km/h", 540, 200, "Speedometer");
         tackometer=new Gauge(0, 10000, " RPM", 840, 300, "Tachometer");
@@ -67,14 +68,25 @@ void draw()
         tripComputer.getCurrentSpeed();
         tripComputer.updateTotalDistance(dataStream.readTime());
         compass.update(dataStream.readY(), dataStream.readX());
+        fuelTank.getFuelLevel();
+        fuelTank.getConsumedFuel();
+        
+        fuelComputer.calculateFuelEconomy(tripComputer.totalTravelledDistance*0.001);
+        fuelComputer.calculateAverageFuelEconomy();
+        fuelComputer.calculateFuelConsumption();
+        fuelComputer.calculateRange();
+        
         fuelGauge.getInput(dataStream.readFuel());
         tackometer.getInput(dataStream.readRPM());
         speedometer.getInput(tripComputer.speed*3.6);
         speedChart.updateData(tripComputer.speed*3.6);
         speedChart.drawChart();
         fill(255);
-        text("Odometer: "+nf(tripComputer.totalTravelledDistance*0.001,0, 2) +"km", 540, 425);
+        text("Odometer: "+nf(tripComputer.totalTravelledDistance*0.001,0, 2) +" km", 540, 425);
         text("Time: "+dataStream.readTime()/60 +":"+nf(dataStream.readTime()%60, 2, 0), 1020, 30);
+        text("Range: "+fuelComputer.range +" km", 240, 500);
+        text("Fuel Economy: "+fuelComputer.fuelEconomy+" km/liter", 540, 500);
+        text("Fuel Consumption: "+fuelComputer.fuelConsumption+" liter/100km",840,500);
     }
     if(currentIndex>600)
     {
