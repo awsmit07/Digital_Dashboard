@@ -11,14 +11,17 @@ class FuelComputer
   //Calculates the fuel economy of the car in km/L
   void calculateFuelEconomy(float distanceTravelled)
   {
-    if(fuelTank.fuelConsumed[currentIndex]!=0)
+    if(currentIndex<fuelTank.fuelConsumed.length)
     {
-      float sum=0;
-      for(int i=0; i<fuelTank.fuelConsumed.length; i++) sum+=fuelTank.fuelConsumed[i];
-      fuelEconomy = distanceTravelled/sum; 
-      //println(fuelEconomy);
-      fuelEconomyHistory[currentIndex] = fuelEconomy;
-      //println(fuelEconomyHistory);
+      if(fuelTank.fuelConsumed[currentIndex]!=0)
+      {
+        float sum=0;
+        for(int i=0; i<fuelTank.fuelConsumed.length; i++) sum+=fuelTank.fuelConsumed[i];
+        fuelEconomy = distanceTravelled/sum; 
+        //println(fuelEconomy);
+        fuelEconomyHistory[currentIndex] = fuelEconomy;
+        //println(fuelEconomyHistory);
+      }
     }
   }
 
@@ -43,11 +46,14 @@ class FuelComputer
 
   void calculateRange() 
   {
-    float briefFuelEconomy = 0;
-    for (int j = currentIndex; j > currentIndex-60 && j>0; j--)
-      briefFuelEconomy += fuelEconomyHistory[j];
-    //println(briefFuelEconomy);
-    briefFuelEconomy /= 60;
-    range = briefFuelEconomy*fuelTank.fuelLevel;
+    if(currentIndex<fuelEconomyHistory.length)
+    {
+      float briefFuelEconomy = 0;
+      for (int j = currentIndex; j > currentIndex-60 && j>0; j--)
+        briefFuelEconomy += fuelEconomyHistory[j];
+      //println(briefFuelEconomy);
+      briefFuelEconomy /= 60;
+      range = briefFuelEconomy*fuelTank.fuelLevel;
+    }
   }
 }

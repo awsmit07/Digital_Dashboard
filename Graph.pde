@@ -1,4 +1,5 @@
 import org.gicentre.utils.stat.*;
+
 public class Graph extends BarChart {
     int X;
     int Y;
