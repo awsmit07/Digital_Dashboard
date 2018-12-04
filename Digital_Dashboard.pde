@@ -27,7 +27,7 @@ void setup()
 {
     
     size(1080, 850);
-    frameRate(30);
+    frameRate(10);
     carButton=new CarButton(width/2-50, height/3-50, 100, 25, "Car", #7907fc, #f407fc, #070ffc);
     truckButton=new TruckButton(width/2-50, height/3-20, 100, 25, "Truck", #7907fc, #f407fc, #070ffc);
     exitButton=new ExitButton(width/2-50, height/3+10, 100, 25, "Exit", #7907fc, #f407fc, #070ffc);
@@ -59,7 +59,7 @@ void draw()
         tripComputer=new TripComputer();
         consumptionChart=new Graph(0, 600, 0, 300, this, 40);
         economyChart=new Graph(width-500, 600, 0, 10, this, 60);
-        frameRate(10);
+        frameRate(30);
     }
     if(!inputMode)
     {
