@@ -5,7 +5,8 @@ public class Graph extends BarChart {
     float min;
     float max;
     float [] data={};
-    public Graph (int X, int Y, float min, float max, PApplet app) 
+    int maxData;
+    public Graph (int X, int Y, float min, float max, PApplet app, int maxData) 
     {
         super(app);
         this.X=X;
@@ -14,6 +15,7 @@ public class Graph extends BarChart {
         this.max=max;
         this.setMinValue(min);
         this.setMaxValue(max);
+        this.maxData=maxData;
         setBarGap(4);
         setBarColour(color(250, 100, 20));
         showValueAxis(true);
@@ -24,12 +26,20 @@ public class Graph extends BarChart {
     {
         //data=append(this.data, currentIndex);
         data=append(this.data, newData);
+        if(data.length>maxData)
+        {
+            data=subset(data, 1);
+        }
         setData(this.data);
     }
     public void updateData(int newData)
     {
         //data=append(this.data, currentIndex);
         data=append(this.data, (float)newData);  
+        if(data.length>maxData)
+        {
+            data=subset(data, 1);
+        }
         setData(this.data);
     }
     public void drawChart()
