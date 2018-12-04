@@ -19,7 +19,7 @@ class FuelTank
   void getConsumedFuel()
   {
     if (currentIndex==0) fuelConsumed[currentIndex]=0;
-    else 
+    else if(fuelConsumed.length>currentIndex)
     {
       fuelConsumed[currentIndex]= lastFuelLevel-fuelLevel;
       //println( lastFuelLevel-fuelLevel );

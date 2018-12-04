@@ -88,9 +88,9 @@ void draw()
         fill(255);
         text("Odometer: "+nf(tripComputer.totalTravelledDistance*0.001,0, 2) +" km", 540, 425);
         text("Time: "+dataStream.readTime()/60 +":"+nf(dataStream.readTime()%60, 2, 0), 1020, 30);
-        text("Range: "+fuelComputer.range +" km", 240, 500);
-        text("Fuel Economy: "+fuelComputer.fuelEconomy+" km/liter", 540, 500);
-        text("Fuel Consumption: "+fuelComputer.fuelConsumption+" liter/100km",840,500);
+        text("Range: "+fuelComputer.range +" km", 540, 500);
+        text("Fuel Economy: "+fuelComputer.fuelEconomy+" km/liter", 240, 550);
+        text("Fuel Consumption: "+fuelComputer.fuelConsumption+" liter/100km",840,550);
     }
     if(currentIndex>600)
     {
