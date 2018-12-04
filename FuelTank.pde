@@ -11,21 +11,20 @@ class FuelTank
     this.fuelCapacity=fuelCapacity;
   }
 
-  void getfuelLevel()
+  void getFuelLevel()
   {
     fuelLevel = dataStream.readFuel();
   }
   //Calculates the reamining fuel using input fuel levels
   void getConsumedFuel()
   {
-    if (j==0) fuelConsumed[j]=0;
+    if (currentIndex==0) fuelConsumed[currentIndex]=0;
     else
     {
-      fuelConsumed[j]= fuelLevel - lastFuelLevel;
-      
+      fuelConsumed[currentIndex]= lastFuelLevel-fuelLevel;
+      //println( lastFuelLevel-fuelLevel );
     }
     lastFuelLevel = dataStream.readFuel();
-    j++;
   }
   
  
