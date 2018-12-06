@@ -6,9 +6,11 @@ class FuelTank
   float fuelLevel;
   float fuelCapacity;
 
-  FuelTank (float fuelCapacity) 
+  FuelTank (float fuelCapacity, float fuelLevel) 
   {
     this.fuelCapacity=fuelCapacity;
+    this.fuelLevel=fuelLevel;
+    this.lastFuelLevel=fuelLevel;
   }
 
   void getFuelLevel()
@@ -18,8 +20,8 @@ class FuelTank
   //Calculates the reamining fuel using input fuel levels
   void getConsumedFuel()
   {
-    if (currentIndex==0) fuelConsumed[currentIndex]=0;
-    else if(fuelConsumed.length>currentIndex)
+    //if (currentIndex==0) fuelConsumed[currentIndex]=0;
+    if(fuelConsumed.length>currentIndex)
     {
       fuelConsumed[currentIndex]= lastFuelLevel-fuelLevel;
       //println( lastFuelLevel-fuelLevel );

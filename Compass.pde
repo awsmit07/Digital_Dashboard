@@ -18,12 +18,13 @@ class Compass
         float dLat=curLat-preLat;
         float dLong=curLong-preLong;
         float angle=degrees(atan2(dLat,dLong));
-        println(angle);
+        //println(angle);
         if(angle<0) angle+=360;
+        //println(angle);
         if(angle>22.5 && angle<157.5) text+='N';
         else if(angle>202.5 && angle<337.5) text+='S';
         
-        if((angle>0&&angle<67.5)||(angle<360&&angle>292.5)) text+='E';
+        if((angle>=0&&angle<67.5)||(angle<=360&&angle>292.5)) text+='E';
         else if(angle>112.5 && angle<247.5) text+='W';
         stroke(0,0,255);
         strokeWeight(2);

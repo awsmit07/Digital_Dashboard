@@ -1,9 +1,9 @@
 class FuelComputer
 {
-  float fuelEconomy;
+  float fuelEconomy=0;
   float fuelConsumption;
-  float [] fuelEconomyHistory = new float [dataStream.dataTable.getRowCount()];
-  float averageFuelEconomy;
+  float [] fuelEconomyHistory = {};
+  float averageFuelEconomy=0;
   float range=0; 
   float remainingFuel;
   int i = 0;
@@ -15,11 +15,9 @@ class FuelComputer
     {
       if(fuelTank.fuelConsumed[currentIndex]!=0)
       {
-        float sum=0;
-        for(int i=0; i<fuelTank.fuelConsumed.length; i++) sum+=fuelTank.fuelConsumed[i];
-        fuelEconomy = distanceTravelled/sum; 
+        fuelEconomy = distanceTravelled/fuelTank.fuelConsumed[currentIndex]; 
         //println(fuelEconomy);
-        fuelEconomyHistory[currentIndex] = fuelEconomy;
+        
         //println(fuelEconomyHistory);
       }
     }
@@ -28,20 +26,32 @@ class FuelComputer
   //Calculates the average fuel economy
   void calculateAverageFuelEconomy()
   {
-      float sum=0;
-      for(int i=0; i<fuelEconomyHistory.length; i++) 
-      {    
-          sum+=fuelEconomyHistory[i];
-          
+    float sum=0;
+    fuelEconomyHistory = append(fuelEconomyHistory, fuelEconomy);
+    if(fuelEconomyHistory.length>=60)
+    {
+      //println("CURRENT INDEX: "+ currentIndex);
+      for(int i=fuelEconomyHistory.length-60;i<fuelEconomyHistory.length; i++) 
+      {
+        sum+=fuelEconomyHistory[i];
+        
+        //println(i);
       }
-      //println(sum);
-      averageFuelEconomy=sum/currentIndex;
+      sum/=60;
+    }
+    else 
+    {
+      for(int i=0; i<fuelEconomyHistory.length; i++) sum+=fuelEconomyHistory[i];
+      sum/= fuelEconomyHistory.length;
+      
+    }
+    averageFuelEconomy=sum;
   }
 
   //Calculates the rate of fuel consumption in L/sec
   void calculateFuelConsumption()
   {
-    fuelConsumption = (1/averageFuelEconomy)*100;
+    if (averageFuelEconomy!=0) fuelConsumption = (1/averageFuelEconomy)*100;
   }
 
   void calculateRange() 
@@ -53,7 +63,7 @@ class FuelComputer
         briefFuelEconomy += fuelEconomyHistory[j];
       //println(briefFuelEconomy);
       briefFuelEconomy /= 60;
-      range = briefFuelEconomy*fuelTank.fuelLevel;
+      range = averageFuelEconomy*fuelTank.fuelLevel;
     }
   }
 }

@@ -20,6 +20,7 @@ float radius=0;
 int currentIndex=-1;
 float tankCapacity;
 FuelComputer fuelComputer;
+int frames=0;
 
 
 //SETUP
@@ -37,9 +38,10 @@ void setup()
 void draw()
 {
     
-    background(0);
+    
     if(inputMode)
     {
+        background(0);
         carButton.button_update();
         truckButton.button_update();
         exitButton.button_update();
@@ -48,49 +50,61 @@ void draw()
     if(!inputMode && currentIndex==-1)
     {
         background(0);
+        currentIndex++;
+        
         dataStream=new SensorDataProvider(file);
+        dataStream.readNext();
         compass=new Compass(0,0,width/2, 35);
         tripComputer=new TripComputer();
-        fuelTank=new FuelTank(tankCapacity);
+        fuelTank=new FuelTank(tankCapacity, dataStream.readFuel());
         fuelComputer=new FuelComputer();
         fuelGauge=new Gauge(0, (int)fuelTank.fuelCapacity, " L", 240, 300, "Fuel Gauge");
         speedometer=new Gauge(0, 300, " km/h", 540, 200, "Speedometer");
         tackometer=new Gauge(0, 10000, " RPM", 840, 300, "Tachometer");
         tripComputer=new TripComputer();
-        consumptionChart=new Graph(10, 600, 0, 1, this, 40, "Average Fuel Economy");
-        economyChart=new Graph(width-500, 600, 0, 1, this, 60, "Fuel Consumption");
-        frameRate(1);
+        consumptionChart=new Graph(width-500, 600, 0, 30, this, 40, "Fuel Consumption");
+        economyChart=new Graph(20, 600, 0, 1, this, 40, "Average Fuel Economy");
+        frameRate(30);
+        frames=0;
     }
     if(!inputMode)
     {
-        currentIndex++;   
-        dataStream.readNext();
-        tripComputer.RPM=dataStream.readRPM();
-        tripComputer.gear_ratio=dataStream.readRatio();
-        tripComputer.getCurrentSpeed();
-        tripComputer.updateTotalDistance(dataStream.readTime());
-        compass.update(dataStream.readY(), dataStream.readX());
-        fuelTank.getFuelLevel();
-        fuelTank.getConsumedFuel();
-        
-        fuelComputer.calculateFuelEconomy(tripComputer.totalTravelledDistance*0.001);
-        fuelComputer.calculateAverageFuelEconomy();
-        fuelComputer.calculateFuelConsumption();
-        fuelComputer.calculateRange();
-        
-        fuelGauge.getInput(dataStream.readFuel());
-        tackometer.getInput(dataStream.readRPM());
-        speedometer.getInput(tripComputer.speed*3.6);
-        consumptionChart.updateData(fuelComputer.fuelConsumption);
-        consumptionChart.drawChart();
-        economyChart.updateData(fuelComputer.averageFuelEconomy);
-        economyChart.drawChart();
-        fill(255);
-        text("Odometer: "+nf(tripComputer.totalTravelledDistance*0.001,0, 2) +" km", 540, 425);
-        text("Time: "+dataStream.readTime()/60 +":"+nf(dataStream.readTime()%60, 2, 0), 1020, 30);
-        text("Range: "+fuelComputer.range +" km", 540, 500);
-        text("Fuel Economy: "+fuelComputer.fuelEconomy+" km/liter", 240, 550);
-        text("Fuel Consumption: "+fuelComputer.fuelConsumption+" liter/100km",840,550);
+        if(frames==0)
+        {
+            background(0);
+              
+            dataStream.readNext();
+            tripComputer.RPM=dataStream.readRPM();
+            tripComputer.gear_ratio=dataStream.readRatio();
+            tripComputer.getCurrentSpeed();
+            tripComputer.updateTotalDistance(dataStream.readTime());
+            compass.update(dataStream.readY(), dataStream.readX());
+            fuelTank.getFuelLevel();
+            fuelTank.getConsumedFuel();
+            
+            fuelComputer.calculateFuelEconomy(tripComputer.distance); //<>//
+            fuelComputer.calculateAverageFuelEconomy();
+            fuelComputer.calculateFuelConsumption();
+            fuelComputer.calculateRange();
+            
+            fuelGauge.getInput(dataStream.readFuel());
+            tackometer.getInput(dataStream.readRPM());
+            speedometer.getInput(tripComputer.speed*3.6);
+            consumptionChart.updateData(fuelComputer.fuelConsumption);
+            consumptionChart.drawChart();
+            economyChart.updateData(fuelComputer.averageFuelEconomy);
+            economyChart.drawChart();
+            fill(255);
+            text("Odometer: "+nf(tripComputer.totalTravelledDistance,0, 2) +" km", 540, 425);
+            text("Time: "+dataStream.readTime()/60 +":"+nf(dataStream.readTime()%60, 2, 0), 1020, 30);
+            text("Range: "+fuelComputer.range +" km", 540, 500);
+            text("Fuel Economy: "+fuelComputer.fuelEconomy+" km/liter", 240, 550);
+            text("Fuel Consumption: "+fuelComputer.fuelConsumption+" liter/100km",840,550);
+            currentIndex++; 
+        }
+        frames++;
+        frames%=3;
+        //println(frames);
     }
     if(currentIndex>600)
     {
