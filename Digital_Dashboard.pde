@@ -57,9 +57,9 @@ void draw()
         speedometer=new Gauge(0, 300, " km/h", 540, 200, "Speedometer");
         tackometer=new Gauge(0, 10000, " RPM", 840, 300, "Tachometer");
         tripComputer=new TripComputer();
-        consumptionChart=new Graph(0, 600, 0, 300, this, 40);
-        economyChart=new Graph(width-500, 600, 0, 10, this, 60);
-        frameRate(30);
+        consumptionChart=new Graph(10, 600, 0, 1, this, 40, "Average Fuel Economy");
+        economyChart=new Graph(width-500, 600, 0, 1, this, 60, "Fuel Consumption");
+        frameRate(1);
     }
     if(!inputMode)
     {
