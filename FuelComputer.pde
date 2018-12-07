@@ -11,11 +11,11 @@ class FuelComputer
   //Calculates the fuel economy of the car in km/L
   void calculateFuelEconomy(float distanceTravelled)
   {
-    if(currentIndex<fuelTank.fuelConsumed.length)
+    if(currentIndex<car.fuelTank.fuelConsumed.length)
     {
-      if(fuelTank.fuelConsumed[currentIndex]!=0)
+      if(car.fuelTank.fuelConsumed[currentIndex]!=0)
       {
-        fuelEconomy = distanceTravelled/fuelTank.fuelConsumed[currentIndex]; 
+        fuelEconomy = distanceTravelled/car.fuelTank.fuelConsumed[currentIndex]; 
         //println(fuelEconomy);
         
         //println(fuelEconomyHistory);
@@ -63,7 +63,7 @@ class FuelComputer
         briefFuelEconomy += fuelEconomyHistory[j];
       //println(briefFuelEconomy);
       briefFuelEconomy /= 60;
-      range = averageFuelEconomy*fuelTank.fuelLevel;
+      range = averageFuelEconomy*car.fuelTank.fuelLevel;
     }
   }
 }

@@ -41,7 +41,6 @@ class Gauge
         fill(0);
         ellipse(x, y, 250, 250);
         strokeWeight(2);
-        rect(390, 400, 300, 35);
         fill(255);
         textAlign(CENTER);
         textSize(30);

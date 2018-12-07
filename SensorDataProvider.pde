@@ -8,7 +8,7 @@ class SensorDataProvider
     //file:String of the name of the data table to be accessed.
     SensorDataProvider (String file) 
     {
-        filePath=sketchPath()+dataPath("/data/"+file);
+        filePath=file;
         dataTable=loadTable(filePath, "header");
     }
 

@@ -103,3 +103,28 @@ class ExitButton extends Button
 		exit();
 	}
 }
+
+class GPSModeButton extends Button
+{
+	GPSModeButton(int xPos, int yPos, int width, int height, String text, int color0, int color1, int color2)
+	{
+		super(xPos, yPos, width, height, text, color0, color1, color2);
+	}
+	void button_function()
+	{
+		gpsMode=!gpsMode;
+    gps.drawGPS();
+	}
+}
+
+class MenuButton extends Button
+{
+	MenuButton(int xPos, int yPos, int width, int height, String text, int color0, int color1, int color2)
+	{
+		super(xPos, yPos, width, height, text, color0, color1, color2);
+	}
+	void button_function()
+	{
+		currentIndex=600;
+	}
+}
